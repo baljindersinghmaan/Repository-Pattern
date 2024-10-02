@@ -1,5 +1,5 @@
 namespace Repo_Pattern.RepoPattern;
-    public interface IRepository<T> where T : IAggregate{
+    public interface IRepository<T> where T : IAggregateRoots{
         public T FindById(object Id);
         public IList<T> GetAll();
         public T Create();
