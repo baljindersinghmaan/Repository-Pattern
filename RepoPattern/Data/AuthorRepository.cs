@@ -1,25 +1,23 @@
 namespace Repo_Pattern.RepoPattern;
 
-public class MockAuthorRepository : IRepository<Author>
+public class MockAuthorRepository : IRepository<Author, string>
 {
     private static IList<Author> _db = new List<Author>();
-    public Author Create()
+    
+
+    public Author Create(Author model)
     {
-        throw new NotImplementedException();
+        _db.Add(model);
+        return model;
     }
 
-    public Author Create(params object[] args)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Delete(object Id)
+    public void Delete(string Id)
     {
         Author? a = FindById(Id);
         _db.Remove(a);
     }
 
-    public Author FindById(object Id)
+    public Author FindById(string Id)
     {
         Author? a = _db.Where(author => author.Email == Id.ToString()).SingleOrDefault();
 
@@ -34,7 +32,7 @@ public class MockAuthorRepository : IRepository<Author>
         return _db;
     }
 
-    public void Update(object Id, Author model)
+    public void Update(string Id, Author model)
     {
         Author author = this.FindById(Id);
 

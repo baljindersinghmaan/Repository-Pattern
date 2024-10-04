@@ -1,12 +1,12 @@
 namespace Repo_Pattern.RepoPattern;
-    public interface IRepository<T> where T : IAggregateRoots{
-        public T FindById(object Id);
-        public IList<T> GetAll();
-        public T Create();
+    public interface IRepository<TType, Tkey> where TType : IAggregateRoots{
+        public TType FindById(Tkey Id);
+        public IList<TType> GetAll();
+        
 
-        public T Create(params object[] args);
-        public void Update(object Id, T model);
+        public TType Create(TType model);
+        public void Update(Tkey Id, TType model);
 
-        public void Delete(object Id);
+        public void Delete(Tkey Id);
 
     }

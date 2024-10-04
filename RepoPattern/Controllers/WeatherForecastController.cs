@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Repo_Pattern.RepoPattern;
 
 namespace RepoPattern.Controllers;
 
@@ -12,10 +13,26 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IRepository<Author,string >_db;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IRepository<Author , string> author)
     {
         _logger = logger;
+        _db = author;
+    }
+
+    [HttpPost("")]
+    public Author AddAuthor([FromBody] Author author)
+    {
+        
+         _db.Create(author);
+        return author;
+    }
+
+    [HttpGet("authors")]
+    public IList<Author> GetAuthor()
+    {
+        return _db.GetAll();
     }
 
     [HttpGet(Name = "GetWeatherForecast")]

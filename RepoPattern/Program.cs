@@ -1,6 +1,12 @@
+using Repo_Pattern.RepoPattern;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+//builder.Services.AddAuthentication();
+
+builder.Services.AddSingleton<IRepository<Author , string>>(new MockAuthorRepository());
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
