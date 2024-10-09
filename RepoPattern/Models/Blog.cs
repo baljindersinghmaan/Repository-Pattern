@@ -1,12 +1,16 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Repo_Pattern.RepoPattern;
 
     public class Blog {
         
         public string? Description {get; set;}
         public string Name {get; set;}
+        [Key]
         public string URL {get; set;}
+        private IList<BlogPost> _blogPosts = new List<BlogPost>();
 
-        public List<BlogPost>? BlogPosts{get; set;}
+        public IReadOnlyCollection<BlogPost>? BlogPosts => _blogPosts.AsReadOnly();
 
         protected Blog() {}
 
@@ -24,6 +28,9 @@ namespace Repo_Pattern.RepoPattern;
         public Blog(string url, string name, string description) : this(url, name){
             
             this.Description = description;
+        }
+        public void AddBlogPost(string url, string name){
+                _blogPosts.Add(new BlogPost() {URL = url, Name = name});
         }
 
     }

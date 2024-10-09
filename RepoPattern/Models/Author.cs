@@ -4,9 +4,11 @@ namespace Repo_Pattern.RepoPattern;
 
 public class Author : IAggregateRoots{
     public string Name {set; get;}
+
+    [Key]
     public string Email {set; get;}
 
-    // protected Author() {}
+     protected Author() {}
 
     public Author (string email, string name){
 

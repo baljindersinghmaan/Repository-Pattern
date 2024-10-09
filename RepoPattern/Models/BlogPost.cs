@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Repo_Pattern.RepoPattern;
 
 public class BlogPost{
@@ -8,6 +10,7 @@ public class BlogPost{
 
     public Author Author {get; set;}
 
+    [Key]
     public string URL {set; get;}
 
     public Blog Blog {set; get;}
