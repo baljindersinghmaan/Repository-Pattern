@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Repo_Pattern.RepoPattern;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddAuthentication();
 
-builder.Services.AddSingleton<IRepository<Author , string>>(new MockAuthorRepository());
+builder.Services.AddScoped<IRepository<Author , string>, DbAuthorRepository>();
 
+builder.Services.AddDbContext<BlogContext>(option => option.UseInMemoryDatabase("Blog Db"));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
